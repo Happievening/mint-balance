@@ -1,7 +1,7 @@
 <template>
   <div>
     <Layout>
-      <FuncSwitcher />
+      <FuncSwitcher init="-" />
       <TagSwitcher />
       <Notes />
       <MoneyInput />

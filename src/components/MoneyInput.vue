@@ -2,9 +2,9 @@
   <div class="money-input">
     <Icon name="money" />
     <input
-      type="text"
+      type="number"
       placeholder="0.00"
-      name=""
+      name="money-value"
       id=""
       class="input-holder"
     />

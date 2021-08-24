@@ -1,16 +1,58 @@
 <template>
   <div>
     <ul class="funcSwicter">
-      <li class="func selected">支出</li>
-      <li class="func">收入</li>
+      <li :class="type === '-' && 'selected'" @click="switchType('-')">支出</li>
+      <li :class="type === '+' && 'selected'" @click="switchType('+')">收入</li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: "FuncSwitcher",
-};
+import Vue from "vue";
+//使用第三方的组件导出库
+import { Component, Prop } from "vue-property-decorator";
+//TS必须使用class语法导出
+//首先写@Component
+@Component
+export default class FuncSwitcher extends Vue {
+  type: string | undefined = "-";
+  //导入props
+  //大写String->Vue校验； string|undefined->TS编译时校验
+  @Prop(String) readonly init: string | undefined;
+  //函数参数必须指定类型
+  switchType(type: string) {
+    if (type !== "-" && type !== "+") {
+      throw new Error("Type is unknown");
+    }
+    this.type = type;
+  }
+  mounted() {
+    console.log(this.init);
+    this.type = this.init;
+  }
+}
+// JS写法
+// export default {
+//   name: "FuncSwitcher",
+//   props: ["init"],
+//   data(){
+//     return {
+//       type:""
+//     }
+//   },
+//   mounted(){
+//    this.type = this.init
+//   },
+//   methods: {
+//     switchType(type){
+//       if(type!=="-" && type!=="+")
+//       {
+//         throw new Error("Type is unknown")
+//       }
+//       this.type=type
+//     }
+//     }
+// };
 </script>
 
 <style scoped lang="scss">
@@ -21,7 +63,7 @@ export default {
   display: flex;
   justify-content: space-around;
   width: 100vw;
-  .func {
+  li {
     width: 50%;
     display: flex;
     justify-content: center;

@@ -6,7 +6,7 @@
       <input
         type="text"
         placeholder="输入备注（140字内）"
-        name=""
+        name="notes-value"
         id=""
 
       />
