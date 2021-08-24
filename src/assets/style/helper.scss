@@ -1,0 +1,11 @@
+$vue-green: #42b983;
+$vue-green-pad: rgba(66, 185, 131, 0.4);
+$font-hei: -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC,
+	Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial,
+	sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+$font-coding: Menlo, Consolas;
+%x {
+	content: '';
+	display: block;
+	clear: both;
+}
