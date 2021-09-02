@@ -23,6 +23,8 @@ export default {
   .content {
     overflow: hidden;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>

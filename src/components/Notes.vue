@@ -7,23 +7,37 @@
         type="text"
         placeholder="输入备注（140字内）"
         name="notes-value"
-        id=""
-
+        v-model="local"
       />
     </label>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: "Notes",
-};
+import Vue from "vue";
+import { Component, Prop, Watch } from "vue-property-decorator";
+
+@Component
+export default class Notes extends Vue {
+  @Prop(String) readonly value!: string;
+  local = this.value;
+  @Watch("local")
+  onLocalChanged(value: string, oldValue: String) {
+    this.$emit("update:value", value);
+  }
+}
 </script>
 
 <style scoped lang="scss">
 @import "@/assets/style/global.scss";
 @import "@/assets/style/helper.scss";
 .notes {
-
+  box-shadow: 3px 0 3px rgb(0 0 0 / 25%);
+  display: flex;
+  align-items: center;
+  padding: 8px 6px;
+  label {
+    flex-grow: 1;
+  }
 }
 </style>

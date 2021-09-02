@@ -13,14 +13,13 @@ button {
 button {
 	border-radius: 0;
 	background: none;
+	font: inherit;
 }
 img {
 	max-width: 100%;
 }
 ul,
-ol,
-ul li,
-ol li {
+ol {
 	list-style: none;
 }
 
@@ -32,4 +31,6 @@ ol li {
 	overflow: hidden;
 }
 
-//Global Config
+body {
+	font-size: 16px;
+}
