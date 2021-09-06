@@ -17,10 +17,10 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop } from "vue-property-decorator";
-
+import tagListModel from "@/models/tagList";
 @Component
 export default class Tags extends Vue {
-  @Prop(Array) dataSource!: readonly string[];
+  dataSource = tagListModel.fetch();
   selectedTags: string[] = [];
   toggleTag(tag: string) {
     const index = this.selectedTags.indexOf(tag);
@@ -31,10 +31,13 @@ export default class Tags extends Vue {
   }
   addTag() {
     const newTag = prompt("请输入新的tag名");
-    if (!newTag) {
-      alert("标签名不能为空");
-    } else if (this.dataSource) {
-      this.$emit("update:dataSource", [...this.dataSource, newTag]);
+    if (newTag !== null) {
+      if (newTag === "") {
+        alert("标签名不能为空");
+      } else if (this.dataSource) {
+        // this.$emit("update:dataSource", [...this.dataSource, newTag]);
+        tagListModel.create(newTag);
+      }
     }
   }
 }
@@ -47,14 +50,19 @@ export default class Tags extends Vue {
   flex-grow: 1;
   ul {
     display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
     > li {
-      $h: 24px;
+      $h: 36px;
       $w: $h * 1.5;
       height: $h;
-      border-radius: 50%;
+      border-radius: $h * 0.5;
       background-color: lightgrey;
-      padding: 0 16px;
-      text-align: center;
+      padding: 5px 16px;
+      margin: 5px 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       &.selected {
         background-color: $vue-green;
       }
@@ -62,6 +70,7 @@ export default class Tags extends Vue {
   }
   .btn-add {
     border-bottom: 1px solid;
+    margin: 12px 8px;
     color: #d9d9d9;
   }
 }

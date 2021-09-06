@@ -80,9 +80,9 @@ export default class NumberPad extends Vue {
     }
   }
   ok() {
-    this.value = this.number.toString();
     this.$emit("update:number", parseFloat(this.value));
-    this.$emit("xxx");
+    this.$emit("ok");
+    this.value = this.number.toString();
   }
 }
 </script>

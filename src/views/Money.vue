@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <Layout>
-      <Types :value.sync="record.type" />
-      <Tags :data-source.sync="tags" @update:tags="onUpdateTags" />
-      <Notes :value.sync="record.notes" />
-      <NumberPad :number.sync="record.amount" @xxx="onSubmit" />
-    </Layout>
-  </div>
+  <Layout>
+    <Types :value.sync="record.type" />
+    <Tags @update:tags="onUpdateTags" />
+    <Notes :value.sync="record.notes" />
+    <NumberPad :number.sync="record.amount" @ok="onSubmit" />
+  </Layout>
 </template>
 
 <script lang="ts">
@@ -16,46 +14,40 @@ import Tags from "@/components/Tags.vue";
 import Notes from "@/components/Notes.vue";
 import NumberPad from "@/components/NumberPad.vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
-type Record = {
-  type: string;
-  notes: string;
-  tags: string[];
-  amount: number;
-};
+import { mount } from "@vue/test-utils";
+//从JS引入模块请使用require加上default
+// const model = require("@/model.js").default;
+// const model = require("@/model.ts");
+//TS引入模块用import-export default
+import recordListModel from "@/models/recordList";
+import tagListModel from "@/models/tagList";
+
+const recordList = recordListModel.fetch();
 @Component({
   components: { Types, Tags, NumberPad, Notes },
 })
 export default class Money extends Vue {
-  tags: string[] = ["衣", "食", "住", "行", "彩票"];
-  recordList: Record[] = [];
-  record: Record = {
+  tags: string[] = tagListModel.fetch();
+  recordList = recordList;
+  record: RecordListItem = {
     type: "-",
     notes: "",
-    tags: [],
+    selectedtags: [],
     amount: 0,
+    createdAt: "",
+    date: "",
   };
-  onValueUpdate(value: any) {
-    console.log("Money组件监听到Any " + value);
-  }
   onUpdateTags(value: string[]) {
-    console.log("Money组件监听到tags " + value);
-    this.record.tags = value;
-  }
-  onUpdateNotes(value: string) {
-    console.log("Money组件监听到notes " + value);
-    this.record.notes = value;
-  }
-  onUpdateAmount(value: string) {
-    console.log("Money组件监听到tags " + value);
-    this.record.amount = parseFloat(value);
-  }
-  onUpdateTypes(value: string) {
-    console.log("Money组件监听到types " + value);
-    this.record.type = value;
+    this.record.selectedtags = value;
   }
   onSubmit() {
-    this.recordList.push(JSON.parse(JSON.stringify(this.record)));
-    console.log(this.recordList);
+    this.recordList = [
+      ...recordListModel.fetch(),
+      JSON.parse(JSON.stringify(this.record)),
+    ];
+    recordListModel.save(this.recordList);
+    console.log(recordListModel.fetch());
+    this.record.amount = 0;
   }
 }
 </script>

@@ -38,6 +38,9 @@ export default class Notes extends Vue {
   padding: 8px 6px;
   label {
     flex-grow: 1;
+    input {
+      background-color: inherit;
+    }
   }
 }
 </style>
