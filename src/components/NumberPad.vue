@@ -2,7 +2,9 @@
   <div class="content-wrapper">
     <div class="money-input">
       <Icon name="money" />
-      <div class="input-value">{{ this.value }}</div>
+      <div class="input-value">
+        {{ this.value }}
+      </div>
     </div>
     <div class="numberPad">
       <button @click="addContent">7</button
@@ -11,13 +13,15 @@
       ><button @click="backspace"><Icon name="backspace" /></button
       ><button @click="addContent">4</button
       ><button @click="addContent">5</button>
-      <button @click="addContent">6</button><button>-</button
+      <button @click="addContent">6</button
+      ><button @click="addContent">-</button
       ><button @click="addContent">1</button
       ><button @click="addContent">2</button
-      ><button @click="addContent">3</button><button>+</button
-      ><button @click="clear">清空</button><button @click="addContent">0</button
+      ><button @click="addContent">3</button
+      ><button @click="addContent">+</button><button @click="clear">清空</button
+      ><button @click="addContent">0</button
       ><button @click="addContent">.</button
-      ><button @click="ok"><Icon name="ok" /></button>
+      ><button @click="action"><Icon :name="iconName" /></button>
     </div>
   </div>
 </template>
@@ -32,33 +36,69 @@ import { Component, Prop } from "vue-property-decorator";
 export default class NumberPad extends Vue {
   @Prop(Number) number!: number;
   value = this.number.toString();
+  iconName = "ok";
+  isInputInit = true;
+  stack: Array<number | string> = [];
+  plusOrMinus: Boolean = false;
   addContent(event: MouseEvent) {
     if (event.target) {
       //as断言，强制指定类型
       const Button = event.target as HTMLButtonElement;
       let s = Button.textContent as string;
-      //小数点后最多2位
-      if (
-        this.value.indexOf(".") === -1 ||
-        this.value.length - this.value.indexOf(".") !== 3
-      ) {
-        //输入0时
-        if (s === "0") {
+      //输入加减号
+      if ("+-".indexOf(s) >= 0) {
+        if (this.stack.length === 0) {
+          this.stack.push(parseFloat(this.value), s);
+          this.plusOrMinus = true;
+          this.iconName = "equal";
+        }
+      } else {
+        //输入其他字符
+        //首先判断是否处在加减模式下
+        if (this.plusOrMinus) {
+          //如果是，第一个字符替换原来的字符串，解除加减模式
+          if (s === ".") {
+            this.value = "0" + s;
+          } else {
+            this.value = s;
+          }
+          this.plusOrMinus = false;
+        } //不是加减模式之下
+        else if (s === "0") {
+          //输入0的情况
           if (this.value === "0") {
             void 0;
           } else {
-            this.value += s;
+            if (
+              this.value.indexOf(".") < 0 ||
+              this.value.length - this.value.lastIndexOf(".") < 3
+            ) {
+              this.value += s;
+            } else {
+              window.alert("小数点后最多2位哦！");
+            }
           }
+          //输入其他字符的情况下
         } else {
           if (s === ".") {
+            console.log();
             if (this.value.indexOf(".") < 0) {
               this.value += s;
+            } else {
+              window.alert("小数点不能输太多次哦！");
             }
           } else {
-            if (this.value === "0") {
-              this.value = s;
+            if (
+              this.value.indexOf(".") < 0 ||
+              this.value.length - this.value.lastIndexOf(".") < 3
+            ) {
+              if (this.value === "0") {
+                this.value = s;
+              } else {
+                this.value += s;
+              }
             } else {
-              this.value += s;
+              window.alert("小数点后最多2位哦！");
             }
           }
         }
@@ -80,9 +120,36 @@ export default class NumberPad extends Vue {
     }
   }
   ok() {
-    this.$emit("update:number", parseFloat(this.value));
-    this.$emit("ok");
-    this.value = this.number.toString();
+    if (this.value === "0") {
+      console.log("yes");
+      if (window.confirm("金额好像是0哦！你确定要录入吗？") === true) {
+        this.stack.push(parseFloat(this.value));
+        this.$emit("update:number", this.value);
+        this.$emit("ok");
+        this.value = this.number.toString();
+        this.plusOrMinus = false;
+      }
+    } else {
+      this.stack.push(parseFloat(this.value));
+      this.$emit("update:number", this.value);
+      this.$emit("ok");
+      this.value = this.number.toString();
+      this.plusOrMinus = false;
+    }
+  }
+  action() {
+    if (this.iconName === "ok") {
+      this.ok();
+    }
+    if (this.iconName === "equal") {
+      this.stack.push(parseFloat(this.value));
+      console.log("stack:" + this.stack);
+      this.value = (
+        Math.floor(eval(this.stack.join("")) * 100) / 100
+      ).toString();
+      this.stack.length = 0;
+      this.iconName = "ok";
+    }
   }
 }
 </script>
@@ -107,7 +174,9 @@ export default class NumberPad extends Vue {
       flex-grow: 1;
       font-family: $font-coding;
       font-size: 36px;
-      text-align: right;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
     }
   }
   .numberPad {

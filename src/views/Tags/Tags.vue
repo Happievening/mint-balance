@@ -3,14 +3,14 @@
     <div class="content-wrapper">
       <ol>
         <li v-for="tag in tagList" :key="tag">
-          <router-link :to="'/labels/edit/' + tag">
-            <span>{{ tag }}</span
-            ><Icon name="right" />
+          <router-link :to="'/tags/edit/' + tag">
+            <div class="a-tagname">{{ tag }}</div>
+            <div class="a-edit">编辑<Icon name="right" /></div>
           </router-link>
         </li>
       </ol>
-      <div class="btn-add-wrapper">
-        <button class="btn-add" @click="addTag">新建标签</button>
+      <div class="btn-wrapper">
+        <Button @click.native="addTagProto">新建标签</Button>
       </div>
     </div>
   </Layout>
@@ -19,19 +19,19 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import model from "@/models/tagList";
+import tagListModel from "@/models/tagList";
+import Button from "@/components/Button.vue";
 
-@Component
-export default class Labels extends Vue {
-  name = "Labels";
-  tagList = model.fetch();
+@Component({ components: { Button } })
+export default class Tags extends Vue {
+  tagList = tagListModel.fetch();
   addTag() {
     const tag = window.prompt("请输入新的标签");
     if (tag !== null) {
       if (tag === "") {
         alert("标签不可为空");
       } else {
-        const result = model.create(tag);
+        const result = tagListModel.create(tag);
         if (result.code === 0) {
           window.alert("创建成功！");
         } else {
@@ -62,6 +62,12 @@ export default class Labels extends Vue {
         align-items: center;
         justify-content: space-between;
         border-bottom: 1px solid #d9d9d9;
+        .a-tagname {
+          font-size: 18px;
+        }
+        .a-edit {
+          color: darken($color: #fff, $amount: 50%);
+        }
       }
     }
     .icon {
@@ -69,16 +75,11 @@ export default class Labels extends Vue {
       height: 18px;
     }
   }
-  .btn-add {
-    background: $vue-green;
-    border-radius: 4px;
-    padding: 16px;
-    &-wrapper {
-      padding: 5px 16px;
-      display: flex;
-      justify-content: center;
-      margin-top: 28px;
-    }
+  .btn-wrapper {
+    padding: 5px 16px;
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
   }
 }
 </style>

@@ -10,7 +10,7 @@
         {{ tag }}
       </li>
     </ul>
-    <button class="btn-add" @click="addTag">新增标签</button>
+    <button class="btn-add" @click="addTagProto">新增标签</button>
   </div>
 </template>
 
@@ -30,15 +30,21 @@ export default class Tags extends Vue {
     this.$emit("update:tags", [...this.selectedTags]);
   }
   addTag() {
-    const newTag = prompt("请输入新的tag名");
-    if (newTag !== null) {
-      if (newTag === "") {
-        alert("标签名不能为空");
-      } else if (this.dataSource) {
-        // this.$emit("update:dataSource", [...this.dataSource, newTag]);
-        tagListModel.create(newTag);
+    const tag = window.prompt("请输入新的标签");
+    if (tag !== null) {
+      if (tag === "") {
+        alert("标签不可为空");
+      } else {
+        const result = tagListModel.create(tag);
+        if (result.code === 0) {
+          // this.$emit("update:dataSource", [...this.dataSource, newTag]);
+        } else {
+          window.alert("创建失败！原因: " + result.message);
+        }
       }
     }
+
+    // console.log(tagListModel.create(newTag));
   }
 }
 </script>
