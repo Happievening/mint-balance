@@ -122,7 +122,7 @@ export default class NumberPad extends Vue {
   ok() {
     if (this.value === "0") {
       console.log("yes");
-      if (window.confirm("金额好像是0哦！你确定要录入吗？") === true) {
+      if (window.confirm("金额好像是0哦！你确定要录入吗？")) {
         this.stack.push(parseFloat(this.value));
         this.$emit("update:number", this.value);
         this.$emit("ok");
@@ -155,8 +155,8 @@ export default class NumberPad extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/style/global.scss";
-@import "@/assets/style/helper.scss";
+@import "~@/assets/style/global.scss";
+@import "~@/assets/style/helper.scss";
 .content-wrapper {
   padding: 0 4px;
   .money-input {

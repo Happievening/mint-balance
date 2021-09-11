@@ -1,14 +1,8 @@
 const localStorageKeyName = 'tagList';
-type TagList = {
-  data: string[];
-  fetch: () => string[];
-  save: () => { code: 0 | 400; message: string };
-  create: (tag: string) => { code: 0 | 401 | 407; message: string };
-  delete: (tag: string) => { code: 0 | 402 | 403; message: string };
-};
-const tagList: TagList = {
+
+const tagListModel: TagListModel = {
   data: [],
-  fetch() {
+  retrieveTag() {
     this.data = JSON.parse(
       localStorage.getItem(localStorageKeyName) ||
       JSON.stringify('衣食住行'.split(''))
@@ -26,7 +20,7 @@ const tagList: TagList = {
       return {code: 400, message: error as string};
     }
   },
-  create(tag: string) {
+  createTag(tag: string) {
     if (this.data.indexOf(tag) >= 0) {
       return {code: 401, message: '标签已经存在'};
     } else if (tag.length > 8) {
@@ -37,7 +31,7 @@ const tagList: TagList = {
       return {code: 0, message: 'success'};
     }
   },
-  delete(tag: string) {
+  deleteTag(tag: string) {
     if (this.data.indexOf(tag) >= 0) {
       try {
         this.data.splice(this.data.indexOf(tag), 1);
@@ -51,4 +45,5 @@ const tagList: TagList = {
     }
   },
 };
-export default tagList;
+tagListModel.data = tagListModel.retrieveTag()
+export default tagListModel;

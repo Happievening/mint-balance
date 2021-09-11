@@ -2,10 +2,10 @@
   <div class="content-wrapper">
     <ul>
       <li
-        v-for="tag in dataSource"
-        :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
-        :key="tag"
-        @click="toggleTag(tag)"
+          v-for="tag in dataSource"
+          :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
+          :key="tag"
+          @click="toggleTag(tag)"
       >
         {{ tag }}
       </li>
@@ -16,48 +16,40 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
-import tagListModel from "@/models/tagList";
-@Component
+import {Component, Prop} from "vue-property-decorator";
+
+@Component({
+  computed: {
+    dataSource() {
+      // console.log("datasource: " + this.$myVuex.tagListModel.retrieveTag())
+      return this.$myVuex.tagListModel.retrieveTag()
+    }
+  }
+})
 export default class Tags extends Vue {
-  dataSource = tagListModel.fetch();
   selectedTags: string[] = [];
   toggleTag(tag: string) {
     const index = this.selectedTags.indexOf(tag);
     index < 0
-      ? this.selectedTags.push(tag)
-      : this.selectedTags.splice(index, 1);
+        ? this.selectedTags.push(tag)
+        : this.selectedTags.splice(index, 1);
     this.$emit("update:tags", [...this.selectedTags]);
-  }
-  addTag() {
-    const tag = window.prompt("请输入新的标签");
-    if (tag !== null) {
-      if (tag === "") {
-        alert("标签不可为空");
-      } else {
-        const result = tagListModel.create(tag);
-        if (result.code === 0) {
-          // this.$emit("update:dataSource", [...this.dataSource, newTag]);
-        } else {
-          window.alert("创建失败！原因: " + result.message);
-        }
-      }
-    }
-
-    // console.log(tagListModel.create(newTag));
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/style/global.scss";
-@import "@/assets/style/helper.scss";
+@import "~@/assets/style/global.scss";
+@import "~@/assets/style/helper.scss";
+
 .content-wrapper {
   flex-grow: 1;
+
   ul {
     display: flex;
     flex-wrap: wrap;
     overflow-y: scroll;
+
     > li {
       $h: 36px;
       $w: $h * 1.5;
@@ -69,11 +61,13 @@ export default class Tags extends Vue {
       display: flex;
       justify-content: center;
       align-items: center;
+
       &.selected {
         background-color: $vue-green;
       }
     }
   }
+
   .btn-add {
     border-bottom: 1px solid;
     margin: 12px 8px;

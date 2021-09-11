@@ -29,8 +29,8 @@ export default class Notes extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/style/global.scss";
-@import "@/assets/style/helper.scss";
+@import "~@/assets/style/global.scss";
+@import "~@/assets/style/helper.scss";
 .notes {
   box-shadow: 3px 0 3px rgb(0 0 0 / 25%);
   display: flex;

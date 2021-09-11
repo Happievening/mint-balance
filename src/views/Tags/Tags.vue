@@ -5,7 +5,9 @@
         <li v-for="tag in tagList" :key="tag">
           <router-link :to="'/tags/edit/' + tag">
             <div class="a-tagname">{{ tag }}</div>
-            <div class="a-edit">编辑<Icon name="right" /></div>
+            <div class="a-edit">编辑
+              <Icon name="right"/>
+            </div>
           </router-link>
         </li>
       </ol>
@@ -18,20 +20,20 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
-import tagListModel from "@/models/tagList";
+import {Component} from "vue-property-decorator";
 import Button from "@/components/Button.vue";
 
-@Component({ components: { Button } })
+@Component({components: {Button}})
 export default class Tags extends Vue {
-  tagList = tagListModel.fetch();
+  tagList = this.$myVuex.tagListModel.retrieveTag();
+
   addTag() {
     const tag = window.prompt("请输入新的标签");
     if (tag !== null) {
       if (tag === "") {
         alert("标签不可为空");
       } else {
-        const result = tagListModel.create(tag);
+        const result = this.$myVuex.tagModel.createTag(tag);
         if (result.code === 0) {
           window.alert("创建成功！");
         } else {
@@ -44,14 +46,16 @@ export default class Tags extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/style/global.scss";
-@import "@/assets/style/helper.scss";
+@import "~@/assets/style/global.scss";
+@import "~@/assets/style/helper.scss";
 
 .content-wrapper {
   overflow-y: scroll;
+
   ol {
     padding: 0 16px;
     background-color: white;
+
     li {
       a {
         text-decoration: none;
@@ -62,19 +66,23 @@ export default class Tags extends Vue {
         align-items: center;
         justify-content: space-between;
         border-bottom: 1px solid #d9d9d9;
+
         .a-tagname {
           font-size: 18px;
         }
+
         .a-edit {
           color: darken($color: #fff, $amount: 50%);
         }
       }
     }
+
     .icon {
       width: 18px;
       height: 18px;
     }
   }
+
   .btn-wrapper {
     padding: 5px 16px;
     display: flex;

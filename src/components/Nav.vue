@@ -26,8 +26,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/style/global.scss";
-@import "@/assets/style/helper.scss";
+@import "~@/assets/style/global.scss";
+@import "~@/assets/style/helper.scss";
 
 nav {
   display: flex;

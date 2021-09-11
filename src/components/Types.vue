@@ -35,8 +35,8 @@ export default class Types extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/style/global.scss";
-@import "@/assets/style/helper.scss";
+@import "~@/assets/style/global.scss";
+@import "~@/assets/style/helper.scss";
 
 .type-list {
   display: flex;

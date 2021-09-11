@@ -13,8 +13,8 @@ export default class Button extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/style/global.scss";
-@import "@/assets/style/helper.scss";
+@import "~@/assets/style/global.scss";
+@import "~@/assets/style/helper.scss";
 .btn {
   background: $vue-green;
   border-radius: 4px;
