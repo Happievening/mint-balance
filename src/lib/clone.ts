@@ -1,3 +1,3 @@
-export default function clone(obj: any) {
-  return JSON.parse(JSON.stringify(obj))
+export default function clone(obj: any): any {
+  return JSON.parse(JSON.stringify(obj));
 }

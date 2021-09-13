@@ -1,154 +1,214 @@
 <template>
   <div class="content-wrapper">
     <div class="money-input">
-      <Icon name="money" />
+      <Icon name="money"/>
       <div class="input-value">
         {{ this.value }}
       </div>
     </div>
     <div class="numberPad">
-      <button @click="addContent">7</button
-      ><button @click="addContent">8</button
-      ><button @click="addContent">9</button
-      ><button @click="backspace"><Icon name="backspace" /></button
-      ><button @click="addContent">4</button
-      ><button @click="addContent">5</button>
-      <button @click="addContent">6</button
-      ><button @click="addContent">-</button
-      ><button @click="addContent">1</button
-      ><button @click="addContent">2</button
-      ><button @click="addContent">3</button
-      ><button @click="addContent">+</button><button @click="clear">清空</button
-      ><button @click="addContent">0</button
-      ><button @click="addContent">.</button
-      ><button @click="action"><Icon :name="iconName" /></button>
+      <button @click="addContent">
+        <div>7</div>
+      </button
+      >
+      <button @click="addContent">
+        <div>8</div>
+      </button
+      >
+      <button @click="addContent">
+        <div>9</div>
+      </button
+      >
+      <button @click="backspace">
+        <div>
+          <Icon name="backspace"/>
+        </div>
+
+      </button
+      >
+      <button @click="addContent">
+        <div>4</div>
+      </button
+      >
+      <button @click="addContent">
+        <div>5</div>
+      </button>
+      <button @click="addContent">
+        <div>6</div>
+      </button
+      >
+      <button @click="addContent">
+        <div>-</div>
+      </button
+      >
+      <button @click="addContent">
+        <div>1</div>
+      </button
+      >
+      <button @click="addContent">
+        <div>2</div>
+      </button
+      >
+      <button @click="addContent">
+        <div>3</div>
+      </button
+      >
+      <button @click="addContent">
+        <div>+</div>
+      </button>
+      <button @click="clear">
+        <div>清空</div>
+      </button
+      >
+      <button @click="addContent">
+        <div>0</div>
+      </button
+      >
+      <button @click="addContent">
+        <div>.</div>
+      </button
+      >
+      <button @click="action">
+        <div>
+          <Icon :name="iconName"/>
+        </div>
+      </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 //使用第三方的组件导出库
-import { Component, Prop } from "vue-property-decorator";
+import {Component, Prop} from 'vue-property-decorator';
 //TS必须使用class语法导出
 //首先写@Component
 @Component
 export default class NumberPad extends Vue {
   @Prop(Number) number!: number;
   value = this.number.toString();
-  iconName = "ok";
+  iconName = 'ok';
   isInputInit = true;
   stack: Array<number | string> = [];
-  plusOrMinus: Boolean = false;
+  plusOrMinus = false;
+
   addContent(event: MouseEvent) {
     if (event.target) {
       //as断言，强制指定类型
       const Button = event.target as HTMLButtonElement;
       let s = Button.textContent as string;
       //输入加减号
-      if ("+-".indexOf(s) >= 0) {
+      if ('+-'.indexOf(s) >= 0) {
         if (this.stack.length === 0) {
           this.stack.push(parseFloat(this.value), s);
           this.plusOrMinus = true;
-          this.iconName = "equal";
+          this.iconName = 'equal';
         }
       } else {
-        //输入其他字符
-        //首先判断是否处在加减模式下
-        if (this.plusOrMinus) {
-          //如果是，第一个字符替换原来的字符串，解除加减模式
-          if (s === ".") {
-            this.value = "0" + s;
-          } else {
-            this.value = s;
-          }
-          this.plusOrMinus = false;
-        } //不是加减模式之下
-        else if (s === "0") {
-          //输入0的情况
-          if (this.value === "0") {
-            void 0;
-          } else {
-            if (
-              this.value.indexOf(".") < 0 ||
-              this.value.length - this.value.lastIndexOf(".") < 3
-            ) {
-              this.value += s;
-            } else {
-              window.alert("小数点后最多2位哦！");
-            }
-          }
-          //输入其他字符的情况下
+        if (this.value.length > 13) {
+          window.alert('最多输入13个字符（含小数点）哦！');
         } else {
-          if (s === ".") {
-            console.log();
-            if (this.value.indexOf(".") < 0) {
-              this.value += s;
+          //输入其他字符
+          //首先判断是否处在加减模式下
+          if (this.plusOrMinus) {
+            //如果是，第一个字符替换原来的字符串，解除加减模式
+            if (s === '.') {
+              this.value = '0' + s;
             } else {
-              window.alert("小数点不能输太多次哦！");
+              this.value = s;
             }
-          } else {
-            if (
-              this.value.indexOf(".") < 0 ||
-              this.value.length - this.value.lastIndexOf(".") < 3
-            ) {
-              if (this.value === "0") {
-                this.value = s;
-              } else {
+            this.plusOrMinus = false;
+          } //不是加减模式之下
+          else if (s === '0') {
+            //输入0的情况
+            if (this.value === '0') {
+              void 0;
+            } else {
+              if (
+                  this.value.indexOf('.') < 0 ||
+                  this.value.length - this.value.lastIndexOf('.') < 3
+              ) {
                 this.value += s;
+              } else {
+                window.alert('小数点后最多2位哦！');
+              }
+            }
+            //输入其他字符的情况下
+          } else {
+            if (s === '.') {
+              console.log();
+              if (this.value.indexOf('.') < 0) {
+                this.value += s;
+              } else {
+                window.alert('小数点不能输太多次哦！');
               }
             } else {
-              window.alert("小数点后最多2位哦！");
+              if (
+                  this.value.indexOf('.') < 0 ||
+                  this.value.length - this.value.lastIndexOf('.') < 3
+              ) {
+                if (this.value === '0') {
+                  this.value = s;
+                } else {
+                  this.value += s;
+                }
+              } else {
+                window.alert('小数点后最多2位哦！');
+              }
             }
           }
         }
       }
     }
   }
+
   backspace(event: MouseEvent) {
     if (event.target) {
       if (this.value.length === 1) {
-        this.value = "0";
+        this.value = '0';
       } else {
         this.value = this.value.substr(0, this.value.length - 1);
       }
     }
   }
+
   clear(event: MouseEvent) {
     if (event.target) {
-      this.value = "0";
+      this.value = '0';
     }
   }
+
   ok() {
-    if (this.value === "0") {
-      console.log("yes");
-      if (window.confirm("金额好像是0哦！你确定要录入吗？")) {
+    if (this.value === '0') {
+      console.log('yes');
+      if (window.confirm('金额好像是0哦！你确定要录入吗？')) {
         this.stack.push(parseFloat(this.value));
-        this.$emit("update:number", this.value);
-        this.$emit("ok");
+        this.$emit('update:number', this.value);
+        this.$emit('ok');
         this.value = this.number.toString();
         this.plusOrMinus = false;
       }
     } else {
       this.stack.push(parseFloat(this.value));
-      this.$emit("update:number", this.value);
-      this.$emit("ok");
+      this.$emit('update:number', this.value);
+      this.$emit('ok');
       this.value = this.number.toString();
       this.plusOrMinus = false;
     }
   }
+
   action() {
-    if (this.iconName === "ok") {
+    if (this.iconName === 'ok') {
       this.ok();
     }
-    if (this.iconName === "equal") {
+    if (this.iconName === 'equal') {
       this.stack.push(parseFloat(this.value));
-      console.log("stack:" + this.stack);
+      console.log('stack:' + this.stack);
       this.value = (
-        Math.floor(eval(this.stack.join("")) * 100) / 100
+          Math.floor(eval(this.stack.join('')) * 100) / 100
       ).toString();
       this.stack.length = 0;
-      this.iconName = "ok";
+      this.iconName = 'ok';
     }
   }
 }
@@ -157,19 +217,27 @@ export default class NumberPad extends Vue {
 <style scoped lang="scss">
 @import "~@/assets/style/global.scss";
 @import "~@/assets/style/helper.scss";
+
 .content-wrapper {
   padding: 0 4px;
+
   .money-input {
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 12px 14px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 25%);
+    border-radius: 6px;
+    background-color: white;
+    margin: 12px 12px;
+
     .icon {
       width: 2em;
       height: 2em;
       display: flex;
       align-items: center;
     }
+
     .input-value {
       flex-grow: 1;
       font-family: $font-coding;
@@ -179,18 +247,25 @@ export default class NumberPad extends Vue {
       align-items: center;
     }
   }
+
   .numberPad {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
     width: 100vw;
     font-family: $font-hei;
-    padding: 8px 10px;
+    padding: 8px 6px;
+
     button {
-      width: 25%;
-      flex-grow: 1;
+      width: calc(25% - 12.5px);
+      flex-grow: 0;
       font-size: 1.33em;
-      padding: 16px 0;
+      margin: 4px 5px 4px 5px;
+      padding: 10px;
+      background-color: #fff;
+      box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+      border-radius: 5px;
+
     }
   }
 }

@@ -10,31 +10,36 @@
         {{ tag }}
       </li>
     </ul>
-    <button class="btn-add" @click="addTagProto">新增标签</button>
+    <button class="btn-add" @click="addTag">新增标签</button>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import {Component, Prop} from "vue-property-decorator";
+import Vue from 'vue';
+import {Component, Prop} from 'vue-property-decorator';
 
-@Component({
-  computed: {
-    dataSource() {
-      // console.log("datasource: " + this.$myVuex.tagListModel.retrieveTag())
-      return this.$myVuex.tagListModel.retrieveTag()
-    }
-  }
-})
+@Component({})
 export default class Tags extends Vue {
-  selectedTags: string[] = [];
-  toggleTag(tag: string) {
-    const index = this.selectedTags.indexOf(tag);
-    index < 0
-        ? this.selectedTags.push(tag)
-        : this.selectedTags.splice(index, 1);
-    this.$emit("update:tags", [...this.selectedTags]);
+  selectedTags: string[] = this.$store.state.selectedTags;
+
+  get dataSource(): string[] {
+    return this.$store.state.tagList;
   }
+
+  toggleTag(tag: string): void {
+    this.$store.commit('addSelectedTag', tag);
+    this.$emit('update:tags');
+    this.selectedTags = this.$store.state.selectedTags;
+  }
+
+  addTag(): void {
+    this.$store.commit('addTag');
+  }
+
+  created(): void {
+    this.$store.commit('retrieveTag');
+  }
+
 }
 </script>
 

@@ -4,17 +4,16 @@
   </div>
 </template>
 
+<script lang="ts">
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
 
-<script lang="js">
-import store from '@/store/index2'
-
-export default {
-  name: "App",
-  data() {
-    return {
-      store
-    }
+@Component
+export default class App extends Vue {
+  created(): void {
+    this.$store.commit('retrieveRecord');
   }
+
 }
 </script>
 

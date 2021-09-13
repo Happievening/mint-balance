@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    <Title>标签管理</Title>
     <div class="content-wrapper">
       <ol>
         <li v-for="tag in tagList" :key="tag">
@@ -12,36 +13,32 @@
         </li>
       </ol>
       <div class="btn-wrapper">
-        <Button @click.native="addTagProto">新建标签</Button>
+        <Button @click.native="addTag">新建标签</Button>
       </div>
     </div>
   </Layout>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import {Component} from "vue-property-decorator";
-import Button from "@/components/Button.vue";
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
+import Button from '@/components/Button.vue';
+import Title from '@/components/Title.vue';
 
-@Component({components: {Button}})
+@Component({components: {Button, Title}})
 export default class Tags extends Vue {
-  tagList = this.$myVuex.tagListModel.retrieveTag();
+  tagList: string[] = [];
 
-  addTag() {
-    const tag = window.prompt("请输入新的标签");
-    if (tag !== null) {
-      if (tag === "") {
-        alert("标签不可为空");
-      } else {
-        const result = this.$myVuex.tagModel.createTag(tag);
-        if (result.code === 0) {
-          window.alert("创建成功！");
-        } else {
-          window.alert("创建失败！原因: " + result.message);
-        }
-      }
-    }
+  created(): void {
+    this.$store.commit('retrieveTag');
+    this.tagList = this.$store.state.tagList;
+    console.log(this.$store.state);
   }
+
+  addTag(): void {
+    this.$store.commit('addTag');
+  }
+
 }
 </script>
 
@@ -51,6 +48,7 @@ export default class Tags extends Vue {
 
 .content-wrapper {
   overflow-y: scroll;
+  margin-top: 24px;
 
   ol {
     padding: 0 16px;
@@ -88,6 +86,10 @@ export default class Tags extends Vue {
     display: flex;
     justify-content: center;
     margin-top: 28px;
+
+    .btn {
+      color: white;
+    }
   }
 }
 </style>
