@@ -1,4 +1,6 @@
-# morney
+# Project Hermes v3 —— Mint Balance (Vue)
+
+A local balance memo.
 
 ## Project setup
 ```
