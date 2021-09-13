@@ -1,6 +1,13 @@
-# Project Hermes v3 —— Mint Balance (Vue)
+# Project Hermes v3
+<br>
 
-A local balance memo.
+# Mint Balance (Vue)
+
+A local account book.
+
+Constructed by Vue 2 + TypeScript + Vue Router + Vuex.
+
+# How to use this project
 
 ## Project setup
 ```
@@ -29,3 +36,6 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+# License
+[GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
