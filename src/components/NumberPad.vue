@@ -105,8 +105,8 @@ export default class NumberPad extends Vue {
           this.iconName = 'equal';
         }
       } else {
-        if (this.value.length > 13) {
-          window.alert('最多输入13个字符（含小数点）哦！');
+        if (this.value.length > 12) {
+          window.alert('最多输入12个字符（含小数点）哦！');
         } else {
           //输入其他字符
           //首先判断是否处在加减模式下
@@ -175,6 +175,8 @@ export default class NumberPad extends Vue {
   clear(event: MouseEvent) {
     if (event.target) {
       this.value = '0';
+      this.stack = [];
+      this.iconName = "ok";
     }
   }
 
@@ -207,6 +209,7 @@ export default class NumberPad extends Vue {
       this.value = (
           Math.floor(eval(this.stack.join('')) * 100) / 100
       ).toString();
+      this.value.replace(/\.$/, ".00")
       this.stack.length = 0;
       this.iconName = 'ok';
     }

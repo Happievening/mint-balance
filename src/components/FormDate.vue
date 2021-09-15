@@ -18,6 +18,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop, Watch} from 'vue-property-decorator';
+import dayjs from "dayjs";
 
 @Component
 export default class FormInput extends Vue {

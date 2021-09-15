@@ -1,42 +1,50 @@
 //CSS Reset
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 input,
-button {
-	outline: none;
-	border: none;
-	list-style: none;
-	font-family: inherit;
+button,
+ {
+  outline: none;
+  border: none;
+  list-style: none;
+  font-family: inherit;
 }
-button {
-	border-radius: 0;
-	background: none;
-	font: inherit;
+select{
+  appearance:none;
 }
+
+button {
+  border-radius: 0;
+  background: none;
+  font: inherit;
+}
+
 img {
-	max-width: 100%;
+  max-width: 100%;
 }
+
 ul,
 ol {
-	list-style: none;
+  list-style: none;
 }
 
 .icon {
-	width: 1em;
-	height: 1em;
-	vertical-align: -0.15em;
-	fill: currentColor;
-	overflow: hidden;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 
 body {
-	font-size: 16px;
+  font-size: 16px;
 }
 
 @font-face {
-	font-family: 'Lato Regular';
-	src: url('~@/assets/style/fonts/Lato-Regular.woff2') format('woff2');
+  font-family: 'Lato Regular';
+  src: url('~@/assets/style/fonts/Lato-Regular.woff2') format('woff2');
 }

@@ -1,5 +1,5 @@
 # Project Hermes v3
-<br>
+
 
 # Mint Balance (Vue)
 
@@ -39,3 +39,22 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 # License
 [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
+
+
+
+3+=3
+
+3-=3
+
+3++ = 6
+
+3+3+3 = 9
+
+3+++3 = 9
+
+3++++3 = 123
+
+3+3-3 = 3
+
+3-- = 0
+

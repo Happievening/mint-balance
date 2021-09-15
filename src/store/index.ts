@@ -2,13 +2,14 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import clone from '@/lib/clone';
 
+const data = require("../../parsedData.json")
 Vue.use(Vuex);
 
 type VuexStoreState = {
   recordList: RecordListItem[]
   tagList: string[]
   result: ResultObject
-  selectedTags: string[]
+  selectedTag: string
 }
 
 const store = new Vuex.Store({
@@ -16,7 +17,7 @@ const store = new Vuex.Store({
     recordList: [],
     tagList: [],
     result: {code: 1000, message: 'Waiting For Initialization'},
-    selectedTags: []
+    selectedTag: ""
   } as VuexStoreState,
   mutations: {
     save(state, obj: { key: string, data: RecordListItem[] | string[] }) {
@@ -62,7 +63,7 @@ const store = new Vuex.Store({
     },
     retrieveRecord(state) {
       state.recordList = JSON.parse(
-        localStorage.getItem('recordList') || '[]'
+        localStorage.getItem('recordList') || JSON.stringify(data)
       ) as RecordListItem[];
     },
     createRecord(state, r: RecordListItem) {
@@ -91,10 +92,11 @@ const store = new Vuex.Store({
       }
     },
     addSelectedTag(state, tag: string) {
-      const index = state.selectedTags.indexOf(tag);
-      index < 0
-        ? state.selectedTags.push(tag)
-        : state.selectedTags.splice(index, 1);
+      state.selectedTag = tag
+      // const index = state.selectedTags.indexOf(tag);
+      // index < 0
+      //   ? state.selectedTags.push(tag)
+      //   : state.selectedTags.splice(index, 1);
     }
   }
 });

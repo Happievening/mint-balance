@@ -1,7 +1,7 @@
 type RecordListItem = {
   type: string;
   notes: string;
-  selectedTags: string[];
+  selectedTag: string;
   amount: number;
   date: string;
   createdAt: string;
@@ -28,3 +28,10 @@ type RecordListModel = {
   save: (data: RecordListItem[]) => { code: 0 | 400; message: string };
 };
 
+type FilterOptionObject = {
+  start: string,
+  end: string,
+  type: "all" | "+" | '-',
+  keyword: string,
+  checkedTags: string[],
+}

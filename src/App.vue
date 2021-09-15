@@ -12,6 +12,7 @@ import {Component} from 'vue-property-decorator';
 export default class App extends Vue {
   created(): void {
     this.$store.commit('retrieveRecord');
+    this.$store.commit('retrieveTag');
   }
 
 }

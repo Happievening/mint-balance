@@ -25,6 +25,7 @@ import NumberPad from '@/components/NumberPad.vue';
 import FormDate from '@/components/FormDate.vue';
 import FormInput from '@/components/FormInput.vue';
 import {Component} from 'vue-property-decorator';
+import dayjs from "dayjs";
 
 @Component({
   components: {Types, Tags, NumberPad, FormInput, FormDate},
@@ -33,25 +34,26 @@ export default class Money extends Vue {
   record: RecordListItem = {
     type: '-',
     notes: '',
-    selectedTags: [],
+    selectedTag: '未分类',
     amount: 0,
     createdAt: '',
     date: '',
   };
 
   created(): void {
-    this.record.date = new Date().toLocaleDateString();
+    this.record.date = dayjs().format("YYYY-MM-DD");
     if (this.$route.path === '/') {
       this.$router.replace('/money');
     }
   }
 
   onUpdateTags(): void {
-    this.record.selectedTags = this.$store.state.selectedTags;
+    this.record.selectedTag = this.$store.state.selectedTag;
   }
 
   onSubmit(): void {
     this.record.createdAt = new Date().toLocaleString();
+    this.record.date = this.record.date.replace(/\//g, "-")
     this.$store.commit('createRecord', this.record);
     // console.log( localStorage.getItem("recordList"))
     // console.log( this.$store.state.recordList);

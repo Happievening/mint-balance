@@ -32,7 +32,6 @@ export default class Tags extends Vue {
   created(): void {
     this.$store.commit('retrieveTag');
     this.tagList = this.$store.state.tagList;
-    console.log(this.$store.state);
   }
 
   addTag(): void {
