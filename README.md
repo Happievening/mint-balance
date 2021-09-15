@@ -2,13 +2,11 @@
 
 Current Version: 0.9A 
 
-[English](#EN) | [简体中文](#CN)
+[English](#Mint Balance) | [简体中文](#薄荷账本)
 
 <hr>
 
-# CN
-
-# 薄荷账本（Vue）
+# 薄荷账本
 
 一款基于Vue 2 + TypeScript + Vue Router + Vuex实现的本地账本。
 
@@ -16,9 +14,7 @@ Current Version: 0.9A
 
 <hr>
 
-# EN
-
-# Mint Balance (Vue)
+# Mint Balance
 
 A local account book constructed by Vue 2 + TypeScript + Vue Router + Vuex.
 
