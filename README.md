@@ -2,7 +2,7 @@
 
 Current Version: 0.9A 
 
-[English](#Mint Balance) | [简体中文](#薄荷账本)
+[简体中文](#薄荷账本) | [English](#Mint Balance)
 
 <hr>
 
