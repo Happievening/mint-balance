@@ -4,6 +4,8 @@ Current Version: 0.9A
 
 [English](#EN) | [简体中文](#CN)
 
+<hr>
+
 # CN
 
 # 薄荷账本（Vue）
@@ -12,7 +14,7 @@ Current Version: 0.9A
 
 支持记账、按条件查账、标签管理。
 
-<br>
+<hr>
 
 # EN
 
@@ -20,9 +22,9 @@ Current Version: 0.9A
 
 A local account book constructed by Vue 2 + TypeScript + Vue Router + Vuex.
 
-Features balance keeping, condition-based balance searching and tags management.
+Features balance keeping, condition-based balance search and tags management.
 
-<br>
+<hr>
 
 # How to use this project
 
@@ -56,22 +58,3 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 # License
 [GPL v3](http://www.gnu.org/licenses/gpl-3.0.html)
-
-
-
-3+=3
-
-3-=3
-
-3++ = 6
-
-3+3+3 = 9
-
-3+++3 = 9
-
-3++++3 = 123
-
-3+3-3 = 3
-
-3-- = 0
-
