@@ -2,7 +2,7 @@
 
 Current Version: 0.9A 
 
-[简体中文](#薄荷账本) | [English](#Mint Balance)
+[简体中文](#薄荷账本) | [English](#Mint_Balance)
 
 <hr>
 
@@ -14,7 +14,7 @@ Current Version: 0.9A
 
 <hr>
 
-# Mint Balance
+# Mint_Balance
 
 A local account book constructed by Vue 2 + TypeScript + Vue Router + Vuex.
 
