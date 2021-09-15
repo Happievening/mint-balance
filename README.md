@@ -4,7 +4,7 @@ Current Version: 0.9A
 
 [English](#EN) | [简体中文](#CN)
 
-#CN
+# CN
 
 # 薄荷账本（Vue）
 
