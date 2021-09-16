@@ -63,7 +63,7 @@ const store = new Vuex.Store({
     },
     retrieveRecord(state) {
       state.recordList = JSON.parse(
-        localStorage.getItem('recordList') || JSON.stringify(data)
+        localStorage.getItem('recordList') || JSON.stringify(data) || '[]'
       ) as RecordListItem[];
     },
     createRecord(state, r: RecordListItem) {
