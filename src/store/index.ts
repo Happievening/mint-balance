@@ -2,7 +2,13 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import clone from '@/lib/clone';
 
-const data = require("../../parsedData.json")
+let data: RecordListItem[] = []
+try {
+  data = require("../../parsedData.json")
+} catch (e) {
+  data = []
+}
+
 Vue.use(Vuex);
 
 type VuexStoreState = {
@@ -63,7 +69,7 @@ const store = new Vuex.Store({
     },
     retrieveRecord(state) {
       state.recordList = JSON.parse(
-        localStorage.getItem('recordList') || JSON.stringify(data) || '[]'
+        localStorage.getItem('recordList') || JSON.stringify(data)
       ) as RecordListItem[];
     },
     createRecord(state, r: RecordListItem) {
