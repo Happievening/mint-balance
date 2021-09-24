@@ -100,7 +100,7 @@ export default class Edit extends Vue {
 
   created(): void {
     this.$store.commit('retrieveTag');
-    if (this.$store.state.tagList.indexOf(this.$route.params.tagname) >= 0) {
+    if (this.$store.state.tagList.getItemsByKey('name').indexOf(this.$route.params.tagname) >= 0) {
       this.tagName = this.originalTagName = this.$route.params.tagname;
     } else {
       this.$router.replace('/404');

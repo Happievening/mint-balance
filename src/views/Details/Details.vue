@@ -97,6 +97,7 @@ export default class Details extends Vue {
         padding: 6px 6px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
       }
 
       .result-type {

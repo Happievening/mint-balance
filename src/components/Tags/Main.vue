@@ -3,11 +3,11 @@
     <ul>
       <li
           v-for="tag in dataSource"
-          :class="{ selected: selectedTag.indexOf(tag) >= 0 }"
-          :key="tag"
-          @click="toggleTag(tag)"
+          :class="{ selected: selectedTag.indexOf(tag.name) >= 0 }"
+          :key="tag.name"
+          @click="toggleTag(tag.name)"
       >
-        {{ tag }}
+        {{ tag.name }}
       </li>
     </ul>
     <button class="btn-add" @click="addTag">新增标签</button>
@@ -16,14 +16,28 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
+import {Component, Prop, Watch} from 'vue-property-decorator';
 
-@Component({})
+@Component
 export default class Tags extends Vue {
+
+  @Prop(String) readonly type!: string;
+
   selectedTag: string[] = this.$store.state.selectedTag;
+  local = this.type;
 
   get dataSource(): string[] {
-    return this.$store.state.tagList;
+    return this.$store.state.tagList.filter(
+        (item) => {
+          return item.type === this.local;
+        }
+    );
+  }
+
+  @Watch('type')
+  d() {
+    console.log("Type changed");
+    this.local = this.type
   }
 
   toggleTag(tag: string): void {
@@ -33,7 +47,7 @@ export default class Tags extends Vue {
   }
 
   addTag(): void {
-    this.$store.commit('addTag');
+    this.$store.commit('addTag', this.local);
   }
 
   created(): void {

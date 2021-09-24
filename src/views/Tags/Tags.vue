@@ -1,11 +1,11 @@
 <template>
   <Layout>
-    <Title>标签管理</Title>
+    <Types :value.sync="type"/>
     <div class="content-wrapper">
       <ol>
-        <li v-for="tag in tagList" :key="tag">
-          <router-link :to="'/tags/edit/' + tag">
-            <div class="a-tagname">{{ tag }}</div>
+        <li v-for="tag in tagList" :key="tag.name">
+          <router-link :to="'/tags/edit/' + tag.name">
+            <div class="a-tagname">{{ tag.name }}</div>
             <div class="a-edit">编辑
               <Icon name="right"/>
             </div>
@@ -24,20 +24,29 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import Button from '@/components/Button.vue';
 import Title from '@/components/Title.vue';
+import Types from '@/components/Types.vue';
 
-@Component({components: {Button, Title}})
+@Component({components: {Button, Title, Types}})
 export default class Tags extends Vue {
-  tagList: string[] = [];
-
-  created(): void {
-    this.$store.commit('retrieveTag');
-    this.tagList = this.$store.state.tagList;
+  get tagList() {
+    return this.$store.state.tagList.filter(
+        (item) => {
+          return item.type === this.type;
+        }
+    );
   }
 
   addTag(): void {
-    this.$store.commit('addTag');
+    this.$store.commit('addTag', this.type);
   }
 
+  created(): void {
+    this.$store.commit('retrieveTag');
+
+  }
+
+
+  type = '-';
 }
 </script>
 
@@ -47,7 +56,6 @@ export default class Tags extends Vue {
 
 .content-wrapper {
   overflow-y: scroll;
-  margin-top: 24px;
 
   ol {
     padding: 0 16px;

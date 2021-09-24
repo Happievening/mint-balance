@@ -12,8 +12,14 @@ type ResultObject = {
   message: string;
 };
 
+type TagItem = {
+  id: number
+  type: '+' | '-'
+  name: string
+}
+
 type TagListModel = {
-  data: string[];
+  data: TagItem[];
   retrieveTag: () => string[];
   save: () => { code: 0 | 400; message: string };
   createTag: (tag: string) => { code: 0 | 401 | 407; message: string };
@@ -31,7 +37,7 @@ type RecordListModel = {
 type FilterOptionObject = {
   start: string,
   end: string,
-  type: "all" | "+" | '-',
+  type: 'all' | '+' | '-',
   keyword: string,
   checkedTags: string[],
 }

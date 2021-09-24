@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <Types :value.sync="record.type"/>
-    <Tags @update:tags="onUpdateTags"/>
+    <Tags @update:tags="onUpdateTags" :type="record.type"/>
     <FormInput
         class="input-block"
         title="备注（140字内）"
@@ -24,8 +24,8 @@ import Tags from '@/components/Tags/Main.vue';
 import NumberPad from '@/components/NumberPad.vue';
 import FormDate from '@/components/FormDate.vue';
 import FormInput from '@/components/FormInput.vue';
-import {Component} from 'vue-property-decorator';
-import dayjs from "dayjs";
+import {Component, Watch} from 'vue-property-decorator';
+import dayjs from 'dayjs';
 
 @Component({
   components: {Types, Tags, NumberPad, FormInput, FormDate},
@@ -41,11 +41,16 @@ export default class Money extends Vue {
   };
 
   created(): void {
-    this.record.date = dayjs().format("YYYY-MM-DD");
+    this.record.date = dayjs().format('YYYY-MM-DD');
     if (this.$route.path === '/') {
       this.$router.replace('/money');
     }
   }
+
+  // @Watch('record.type')
+  // d() {
+  //   console.log('Money' + this.record.type);
+  // }
 
   onUpdateTags(): void {
     this.record.selectedTag = this.$store.state.selectedTag;
@@ -53,7 +58,7 @@ export default class Money extends Vue {
 
   onSubmit(): void {
     this.record.createdAt = new Date().toLocaleString();
-    this.record.date = this.record.date.replace(/\//g, "-")
+    this.record.date = this.record.date.replace(/\//g, '-');
     this.$store.commit('createRecord', this.record);
     // console.log( localStorage.getItem("recordList"))
     // console.log( this.$store.state.recordList);
