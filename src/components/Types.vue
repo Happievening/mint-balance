@@ -42,12 +42,16 @@ export default class Types extends Vue {
 .content-wrapper {
   display: flex;
   justify-content: center;
-  background-color: $vue-green;
+  margin: 10px 0;
+
   .type-list {
     display: flex;
     justify-content: space-around;
-    width: 66.67vw;
-    min-width: 66.67vw;
+    width: 80vw;
+    min-width: 80vw;
+    border: 2px solid $vue-green;
+    border-radius: 25px;
+    overflow: hidden;
 
     li {
       width: 50%;
@@ -55,14 +59,14 @@ export default class Types extends Vue {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 8px 0;
-      font-size: 24px;
-      color: rgba(255,255,255,0.4);
+      padding: 2px 0;
+      font-size: 18px;
+      color: rgba(0, 0, 0, 0.2);
     }
 
     .selected {
-      border-bottom: 3px solid white;
-      color:white;
+      color: white;
+      background-color: $vue-green;
     }
   }
 }

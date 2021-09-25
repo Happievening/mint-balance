@@ -3,19 +3,18 @@
     <div class="content-wrapper">
       <DataParser @transform="upd"/>
       <div class="info">
-        共找到 {{ summaryOfFilteredData.length }} 天的 {{ numberOfRecordsFiltered }} 条记录。
-        总金额为 {{ summaryOfFilteredData.total }}。
+        {{ summaryOfFilteredData.length }} 天 | {{ numberOfRecordsFiltered }} 条记录 | {{ summaryOfFilteredData.total }}
       </div>
       <div class="result-panel">
         <div class="result result-date" v-for="(dateResultObj,date) in transformRecords " v-bind:key="date">
           <div class="date-wrapper">
             <div>{{ date }}</div>
-            <div>合计：{{ dateResultObj.totalAmount }}</div>
+            <div>{{ dateResultObj.totalAmount }}</div>
           </div>
           <div class="result result-type" v-for="(item1,tagInOneDay) in dateResultObj.data" v-bind:key="tagInOneDay">
             <div class="type-wrapper">
               <div>{{ tagInOneDay }}</div>
-              <div>小计：{{ item1.subToTalAmount }}</div>
+              <div>{{ item1.subToTalAmount }}</div>
             </div>
 
             <div class="result result-item" v-for="item2 in item1.data" :key="item2.createdAt">
@@ -79,22 +78,21 @@ export default class Details extends Vue {
     display: flex;
     margin: 16px 16px;
     flex-basis: inherit;
+    font-size: 16px;
+    justify-content: center;
   }
 
   .result-panel {
     margin-top: 20px;
 
     .result-date {
-      border-radius: 6px;
       overflow: hidden;
-      margin: 24px 16px;
       background-color: $vue-green;
-      box-shadow: 0 1px 3px rgb(0 0 0 / 25%);
       color: white;
       font-size: 18px;
 
       .date-wrapper {
-        padding: 6px 6px;
+        padding: 12px 6px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -107,9 +105,9 @@ export default class Details extends Vue {
         font-weight: 700;
 
         .type-wrapper {
+          padding: 10px 6px;
           display: flex;
           justify-content: space-between;
-          padding: 5px 6px;
         }
 
         .result-item {
@@ -121,7 +119,7 @@ export default class Details extends Vue {
           .item-wrapper {
             display: flex;
             justify-content: space-between;
-            padding: 4px 0;
+            padding: 8px 0;
 
             :nth-child(1) {
               margin-left: 2em

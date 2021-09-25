@@ -22,6 +22,12 @@ export default class App extends Vue {
 @import "~@/assets/style/global.scss";
 @import "~@/assets/style/helper.scss";
 
+html, body, #app {
+  height: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+
 #app {
   font-family: $font-hei;
   background-color: rgba(235, 237, 239, 0.28);

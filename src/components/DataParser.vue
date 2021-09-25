@@ -60,7 +60,7 @@ export default class DataParser extends Vue {
     keyword: '',
     checkedTags: [],
   };
-  foldFlag = true;
+  foldFlag = false;
   numberOfRecordsFiltered = 0;
 
   toggleFold(): void {
@@ -178,7 +178,7 @@ export default class DataParser extends Vue {
     }
 
     .setting-title-text {
-      font-size: 22px
+      font-size: 16px
     }
 
     .setting-fold-icon {
@@ -192,8 +192,8 @@ export default class DataParser extends Vue {
     }
 
     .icon {
-      width: 32px;
-      font-size: 32px;
+      width: 24px;
+      font-size: 24px;
       display: flex;
       justify-content: center;
       align-items: center;

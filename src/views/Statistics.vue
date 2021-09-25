@@ -1,5 +1,5 @@
 <template>
-  <div><Layout>Statistics.Vue</Layout></div>
+  <Layout>Statistics.Vue</Layout>
 </template>
 
 <script lang="ts">

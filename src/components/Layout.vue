@@ -20,11 +20,10 @@ export default class Layout extends Vue {
 
 <style scoped lang="scss">
 .nav-wrapper {
-  height: 100vh !important;
-  max-height: 100vh !important;
   display: flex;
   flex-direction: column;
-
+  min-height: 100%;
+  max-height: 100%;
   .content {
     overflow: hidden;
     flex-grow: 1;
