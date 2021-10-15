@@ -30,7 +30,7 @@ html, body, #app {
 
 #app {
   font-family: $font-hei;
-  background-color: rgba(235, 237, 239, 0.28);
+  background-color: #F5F5F5;
 }
 
 #nav {

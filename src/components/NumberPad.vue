@@ -176,7 +176,7 @@ export default class NumberPad extends Vue {
     if (event.target) {
       this.value = '0';
       this.stack = [];
-      this.iconName = "ok";
+      this.iconName = 'ok';
     }
   }
 
@@ -209,7 +209,7 @@ export default class NumberPad extends Vue {
       this.value = (
           Math.floor(eval(this.stack.join('')) * 100) / 100
       ).toString();
-      this.value.replace(/\.$/, ".00")
+      this.value.replace(/\.$/, '.00');
       this.stack.length = 0;
       this.iconName = 'ok';
     }
@@ -229,7 +229,6 @@ export default class NumberPad extends Vue {
     justify-content: space-around;
     align-items: center;
     padding: 12px 14px;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 25%);
     border-radius: 6px;
     background-color: white;
     margin: 12px 12px;
@@ -264,11 +263,16 @@ export default class NumberPad extends Vue {
       flex-grow: 0;
       font-size: 1.33em;
       margin: 4px 5px 4px 5px;
-      padding: 10px;
       background-color: #fff;
-      box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
       border-radius: 5px;
+      border: 1px solid lightgray;
 
+      div {
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 }

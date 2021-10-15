@@ -4,12 +4,11 @@
     <Tags @update:tags="onUpdateTags" :type="record.type"/>
     <FormInput
         class="input-block"
-        title="备注（140字内）"
+        title=""
         :value.sync="record.notes"
     />
     <FormDate
         class="input-inline"
-        title="选择日期"
         :value.sync="record.date"
         :placeholder="record.date"
     />
@@ -71,12 +70,6 @@ export default class Money extends Vue {
 <style scoped lang="scss">
 @import "~@/assets/style/global.scss";
 @import "~@/assets/style/helper.scss";
-
-.input-block {
-  ::v-deep input {
-    min-width: 100%;
-  }
-}
 
 .input-inline {
   ::v-deep label {

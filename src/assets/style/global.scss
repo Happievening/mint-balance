@@ -7,14 +7,15 @@
 
 input,
 button,
- {
+{
   outline: none;
   border: none;
   list-style: none;
   font-family: inherit;
 }
-select{
-  appearance:none;
+
+select {
+  appearance: none;
 }
 
 button {
@@ -45,6 +46,6 @@ body {
 }
 
 @font-face {
-  font-family: 'Lato Regular';
-  src: url('~@/assets/style/fonts/Lato-Regular.woff2') format('woff2');
+  font-family: 'DIN Next';
+  src: url('~@/assets/style/fonts/DINNextW1G-Medium.OTF')
 }

@@ -1,13 +1,13 @@
 $vue-green: #42b983;
 $vue-green-pad: rgba(66, 185, 131, 0.4);
-$font-hei: Lato Regular, -apple-system, Noto Sans, Helvetica Neue, Helvetica,
-	Nimbus Sans L, Arial, Liberation Sans, PingFang SC, Hiragino Sans GB,
-	Noto Sans CJK SC, Source Han Sans SC, Source Han Sans CN, Microsoft YaHei,
-	Wenquanyi Micro Hei, WenQuanYi Zen Hei, ST Heiti, SimHei,
-	WenQuanYi Zen Hei Sharp, sans-serif;
-$font-coding: Lato Regular;
+$font-hei: DIN Next, -apple-system, Noto Sans, Helvetica Neue, Helvetica,
+Nimbus Sans L, Arial, Liberation Sans, PingFang SC, Hiragino Sans GB,
+Noto Sans CJK SC, Source Han Sans SC, Source Han Sans CN, Microsoft YaHei,
+Wenquanyi Micro Hei, WenQuanYi Zen Hei, ST Heiti, SimHei,
+WenQuanYi Zen Hei Sharp, sans-serif;
+$font-coding: DIN Next;
 %x {
-	content: '';
-	display: block;
-	clear: both;
+  content: '';
+  display: block;
+  clear: both;
 }

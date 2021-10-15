@@ -13,9 +13,9 @@ type ResultObject = {
 };
 
 type TagItem = {
-  id: number
   type: '+' | '-'
   name: string
+  icon: string
 }
 
 type TagListModel = {

@@ -44,7 +44,6 @@ export default class FormInput extends Vue {
   justify-content: center;
 
   .notes {
-    box-shadow: 0px 1px 3px rgb(0 0 0 / 25%);
     border-radius: 6px;
     margin: 12px 16px;
     flex-grow: 1;

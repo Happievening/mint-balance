@@ -90,6 +90,7 @@ export default class Details extends Vue {
       background-color: $vue-green;
       color: white;
       font-size: 18px;
+      margin-bottom: 18px;
 
       .date-wrapper {
         padding: 12px 6px;
