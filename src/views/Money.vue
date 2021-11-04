@@ -7,11 +7,6 @@
         title=""
         :value.sync="record.notes"
     />
-    <FormDate
-        class="input-inline"
-        :value.sync="record.date"
-        :placeholder="record.date"
-    />
     <NumberPad :number.sync="record.amount" @ok="onSubmit"/>
   </Layout>
 </template>
@@ -25,12 +20,13 @@ import FormDate from '@/components/FormDate.vue';
 import FormInput from '@/components/FormInput.vue';
 import {Component, Watch} from 'vue-property-decorator';
 import dayjs from 'dayjs';
+import {Toast} from 'vant';
 
 @Component({
   components: {Types, Tags, NumberPad, FormInput, FormDate},
 })
 export default class Money extends Vue {
-  record: RecordListItem = {
+  record: Record = {
     type: '-',
     notes: '',
     selectedTag: '未分类',
@@ -46,11 +42,6 @@ export default class Money extends Vue {
     }
   }
 
-  // @Watch('record.type')
-  // d() {
-  //   console.log('Money' + this.record.type);
-  // }
-
   onUpdateTags(): void {
     this.record.selectedTag = this.$store.state.selectedTag;
   }
@@ -62,6 +53,7 @@ export default class Money extends Vue {
     // console.log( localStorage.getItem("recordList"))
     // console.log( this.$store.state.recordList);
     this.record.amount = 0;
+    Toast('添加成功！');
   }
 
 }

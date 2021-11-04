@@ -79,6 +79,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import {Dialog, Toast} from 'vant';
 //使用第三方的组件导出库
 import {Component, Prop} from 'vue-property-decorator';
 //TS必须使用class语法导出
@@ -106,7 +107,7 @@ export default class NumberPad extends Vue {
         }
       } else {
         if (this.value.length > 12) {
-          window.alert('最多输入12个字符（含小数点）哦！');
+          Toast('最多输入12个字符（含小数点）哦！');
         } else {
           //输入其他字符
           //首先判断是否处在加减模式下
@@ -130,7 +131,7 @@ export default class NumberPad extends Vue {
               ) {
                 this.value += s;
               } else {
-                window.alert('小数点后最多2位哦！');
+                Toast('小数点后最多2位哦！');
               }
             }
             //输入其他字符的情况下
@@ -140,7 +141,7 @@ export default class NumberPad extends Vue {
               if (this.value.indexOf('.') < 0) {
                 this.value += s;
               } else {
-                window.alert('小数点不能输太多次哦！');
+                Toast('小数点不能输太多次哦！');
               }
             } else {
               if (
@@ -153,7 +154,7 @@ export default class NumberPad extends Vue {
                   this.value += s;
                 }
               } else {
-                window.alert('小数点后最多2位哦！');
+                Toast('小数点后最多2位哦！');
               }
             }
           }
@@ -182,14 +183,20 @@ export default class NumberPad extends Vue {
 
   ok() {
     if (this.value === '0') {
-      console.log('yes');
-      if (window.confirm('金额好像是0哦！你确定要录入吗？')) {
-        this.stack.push(parseFloat(this.value));
-        this.$emit('update:number', this.value);
-        this.$emit('ok');
-        this.value = this.number.toString();
-        this.plusOrMinus = false;
-      }
+      Dialog.confirm({
+        title: '',
+        message: '金额好像是0哦！你确定要录入吗？',
+      })
+          .then(() => {
+            this.stack.push(parseFloat(this.value));
+            this.$emit('update:number', this.value);
+            this.$emit('ok');
+            this.value = this.number.toString();
+            this.plusOrMinus = false;
+          })
+          .catch(() => {
+            // on cancel
+          });
     } else {
       this.stack.push(parseFloat(this.value));
       this.$emit('update:number', this.value);
@@ -272,6 +279,7 @@ export default class NumberPad extends Vue {
         display: flex;
         justify-content: center;
         align-items: center;
+        vertical-align: center;
       }
     }
   }

@@ -1,23 +1,24 @@
-import Vue from 'vue'
-import App from './App.vue'
-import './registerServiceWorker'
-import router from './router'
-import store from './store/index'
-// import mystore from './store/index2'
-import Nav from '@/components/Nav.vue'
-import Layout from '@/components/Layout.vue'
-import Icon from '@/components/Icon.vue'
-
-
-Vue.config.productionTip = false
+import Vue from 'vue';
+import App from './App.vue';
+import './registerServiceWorker';
+import router from './router';
+import store from './store/index';
+import Nav from '@/components/Nav.vue';
+import Layout from '@/components/Layout.vue';
+import Icon from '@/components/Icon.vue';
+Vue.config.productionTip = false;
 
 // Vue.prototype.$myVuex = mystore
-Vue.component('Nav', Nav)
-Vue.component('Layout', Layout)
-Vue.component('Icon', Icon)
+Vue.component('Nav', Nav);
+Vue.component('Layout', Layout);
+Vue.component('Icon', Icon);
+
+//Vant
+import {Toast} from 'vant';
+Vue.use(Toast);
 
 new Vue({
   router,
   store,
   render: (h) => h(App),
-}).$mount('#app')
+}).$mount('#app');

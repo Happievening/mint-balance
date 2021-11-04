@@ -17,7 +17,7 @@
 
 <script lang="ts">
 export default {
-  name: "Nav",
+  name: 'Nav',
 };
 </script>
 
@@ -41,6 +41,7 @@ nav {
       width: 32px;
       height: 32px;
     }
+
     .description {
       font-size: 12px;
       margin-top: 4px;

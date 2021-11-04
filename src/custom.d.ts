@@ -1,4 +1,4 @@
-type RecordListItem = {
+type Record = {
   type: string;
   notes: string;
   selectedTag: string;
@@ -27,11 +27,11 @@ type TagListModel = {
 };
 
 type RecordListModel = {
-  data: RecordListItem[];
-  retrieveRecord: () => RecordListItem[];
-  clone: () => RecordListItem[];
-  createRecord: (r: RecordListItem) => { code: 0 | 401; message: string };
-  save: (data: RecordListItem[]) => { code: 0 | 400; message: string };
+  data: Record[];
+  retrieveRecord: () => Record[];
+  clone: () => Record[];
+  createRecord: (r: Record) => { code: 0 | 401; message: string };
+  save: (data: Record[]) => { code: 0 | 400; message: string };
 };
 
 type FilterOptionObject = {

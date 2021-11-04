@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import clone from '@/lib/clone';
 
-let data: RecordListItem[] = [];
+let data: Record[] = [];
 try {
   data = require('../../parsedData.json');
 } catch (e) {
@@ -23,7 +23,7 @@ console.log(a.getItemsByKey('a'));
 Vue.use(Vuex);
 
 type VuexStoreState = {
-  recordList: RecordListItem[]
+  recordList: Record[]
   tagList: TagItem[]
   result: ResultObject
   selectedTag: string
@@ -37,7 +37,7 @@ const store = new Vuex.Store({
     selectedTag: ''
   } as VuexStoreState,
   mutations: {
-    save(state, obj: { key: string, data: RecordListItem[] | string[] }) {
+    save(state, obj: { key: string, data: Record[] | string[] }) {
       try {
         localStorage.setItem(
           obj.key,
@@ -51,9 +51,9 @@ const store = new Vuex.Store({
     retrieveRecord(state) {
       state.recordList = JSON.parse(
         localStorage.getItem('recordList') || JSON.stringify(data)
-      ) as RecordListItem[];
+      ) as Record[];
     },
-    createRecord(state, r: RecordListItem) {
+    createRecord(state, r: Record) {
       try {
         state.recordList = [...state.recordList, clone(r)];
         store.commit('save', {key: 'recordList', data: state.recordList});
