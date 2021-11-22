@@ -10550,10 +10550,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^2.12.31:
-  version "2.12.31"
-  resolved "https://registry.npmmirror.com/vant/download/vant-2.12.31.tgz?cache=0&sync_timestamp=1635736568711&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fvant%2Fdownload%2Fvant-2.12.31.tgz#a531cafc84c255ef12461397d19ce9a012a4c115"
-  integrity sha1-pTHK/ITCVe8SRhOX0ZzpoBKkwRU=
+vant@^2.12.33:
+  version "2.12.33"
+  resolved "https://registry.npmmirror.com/vant/download/vant-2.12.33.tgz#21c7f757e8952f007740c2265f96bbb45c962bee"
+  integrity sha512-vR2LmJNoSB+Gox1qSdWEOROMOl6lkDcxMLq1hu59AS0VePk41FMuqqV96Rmvo724HRFK8AlJLHrRmPTDOtGFzA==
   dependencies:
     "@babel/runtime" "7.x"
     "@vant/icons" "^1.7.1"
