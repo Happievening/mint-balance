@@ -1,11 +1,18 @@
 <template>
   <div class="content-wrapper">
-    <div class="money-input">
-      <Icon name="money"/>
-      <div class="input-value">
-        {{ this.value }}
+    <div class="info-panel">
+      <div class="money-value">
+        <Icon name="money"/>
+        <div class="money-info">
+          {{ this.value }}
+        </div>
+      </div>
+      <div class="detail-value">
+        <van-button @click="chooseDate">今天</van-button>
+        <van-button @click="inputNotes">（没有备注）</van-button>
       </div>
     </div>
+
     <div class="numberPad">
       <button @click="addContent">
         <div>7</div>
@@ -231,23 +238,47 @@ export default class NumberPad extends Vue {
 .content-wrapper {
   padding: 0 4px;
 
-  .money-input {
+  .info-panel {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    padding: 12px 14px;
     border-radius: 6px;
     background-color: white;
     margin: 12px 12px;
+    border: 1px solid lightgray;
 
-    .icon {
-      width: 2em;
-      height: 2em;
+    .money-value {
+      width: 100%;
       display: flex;
-      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid lightgray;
+      padding: 12px 14px;
+
+      .icon {
+        width: 2em;
+        height: 2em;
+        display: flex;
+        align-items: center;
+      }
+
+
     }
 
-    .input-value {
+    .detail-value {
+      width: 100%;
+      display: flex;
+
+      button {
+        width: 100%;
+        flex-grow: 1;
+        :nth-of-type(1){
+          border-right: 1px solid lightgray;
+        }
+      }
+    }
+
+    .money-info {
       flex-grow: 1;
       font-family: $font-coding;
       font-size: 36px;

@@ -51,7 +51,7 @@ import FormDate from '@/components/FormDate.vue';
 dayjs.extend(isBetween);
 @Component({components: {FormDate}})
 export default class DataParser extends Vue {
-  recordList: Record[] = [];
+  recordList: RecordItem[] = [];
   tagOfRecords: string[] = [];
   filterOptions: FilterOptionObject = {
     start: '',
@@ -67,9 +67,9 @@ export default class DataParser extends Vue {
     this.foldFlag = !this.foldFlag;
   }
 
-  get filteredRecords(): Record[] {
+  get filteredRecords(): RecordItem[] {
     console.log('Start Filter');
-    return this.recordList.filter((item: Record) => {
+    return this.recordList.filter((item: RecordItem) => {
       const dateFlag = dayjs(item.date).isBetween(dayjs(this.filterOptions.start), dayjs(this.filterOptions.end), null, '[]');
       let typesFlag;
       if (this.filterOptions.type === 'all') {
@@ -83,13 +83,13 @@ export default class DataParser extends Vue {
     });
   }
 
-  fetchTagOfRecords(rl: Record[]): string[] {
-    return Array.from(new Set(rl.map((item: Record) => {
+  fetchTagOfRecords(rl: RecordItem[]): string[] {
+    return Array.from(new Set(rl.map((item: RecordItem) => {
       return item.selectedTag || '';
     })));
   }
 
-  fetchDateOfRecords(rl: Record[]): string[] {
+  fetchDateOfRecords(rl: RecordItem[]): string[] {
     //按记录从新到旧
     return Array.from(new Set(rl.map((item) => {
       return item.date;

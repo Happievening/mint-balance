@@ -87,7 +87,7 @@ export default class Details extends Vue {
 
     .result-date {
       overflow: hidden;
-      background-color: $vue-green;
+      background-color: $theme-color;
       color: white;
       font-size: 18px;
       margin-bottom: 18px;

@@ -16,7 +16,7 @@ export default class Button extends Vue {
 @import "~@/assets/style/global.scss";
 @import "~@/assets/style/helper.scss";
 .btn {
-  background: $vue-green;
+  background: $theme-color;
   border-radius: 4px;
   padding: 12px;
 }

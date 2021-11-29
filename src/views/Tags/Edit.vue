@@ -176,7 +176,7 @@ export default class Edit extends Vue {
     margin-top: 28px;
 
     .btn {
-      background-color: $vue-green;
+      background-color: $theme-color;
       color: white;
     }
 

@@ -14,8 +14,9 @@ Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
 
 //Vant
-import {Toast} from 'vant';
+import {Toast, Button} from 'vant';
 Vue.use(Toast);
+Vue.use(Button);
 
 new Vue({
   router,

@@ -49,7 +49,7 @@ export default class Types extends Vue {
     justify-content: space-around;
     width: 80vw;
     min-width: 80vw;
-    border: 2px solid $vue-green;
+    border: 2px solid $theme-color;
     border-radius: 25px;
     overflow: hidden;
 
@@ -66,7 +66,7 @@ export default class Types extends Vue {
 
     .selected {
       color: white;
-      background-color: $vue-green;
+      background-color: $theme-color;
     }
   }
 }

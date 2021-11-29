@@ -30,7 +30,7 @@ import Types from '@/components/Types.vue';
 export default class Tags extends Vue {
   get tagList() {
     return this.$store.state.tagList.filter(
-        (item) => {
+        (item: TagItem) => {
           return item.type === this.type;
         }
     );

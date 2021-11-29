@@ -3,11 +3,15 @@
     <ul>
       <li
           v-for="tag in dataSource"
+          class="tag-item"
           :class="{ selected: selectedTag.indexOf(tag.name) >= 0 }"
           :key="tag.name"
           @click="toggleTag(tag.name)"
       >
-        {{ tag.name }}
+        <div class="tag-item-icon">
+          <Icon :name="tag.icon_name"/>
+        </div>
+        <div class="tag-item-name"> {{ tag.name }}</div>
       </li>
     </ul>
 
@@ -28,7 +32,7 @@ export default class Tags extends Vue {
 
   get dataSource(): string[] {
     return this.$store.state.tagList.filter(
-        (item) => {
+        (item: TagItem) => {
           return item.type === this.local;
         }
     );
@@ -36,8 +40,8 @@ export default class Tags extends Vue {
 
   @Watch('type')
   d() {
-    console.log("Type changed");
-    this.local = this.type
+    console.log('Type changed');
+    this.local = this.type;
   }
 
   toggleTag(tag: string): void {
@@ -70,19 +74,34 @@ export default class Tags extends Vue {
     overflow-y: scroll;
 
     > li {
-      $h: 36px;
-      $w: $h * 1.5;
-      height: $h;
-      border-radius: $h * 0.5;
-      background-color: lightgrey;
+      width: 25%;
+      min-width: 25%;
       padding: 5px 16px;
       margin: 5px 8px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      font-size: 14px;
 
-      &.selected {
-        background-color: $vue-green;
+      .tag-item-icon {
+        background-color: lightgrey;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          width: 100%;
+          padding: 6px;
+          height: 100%;
+        }
+      }
+
+      &.selected .tag-item-icon {
+        background-color: rgba($theme-color, 80%);
       }
     }
   }

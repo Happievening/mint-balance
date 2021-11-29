@@ -25,7 +25,7 @@ export default class Title extends Vue {
   font-size: 24px;
   padding: 1em 0;
   box-shadow: 0 0 3px rgb(0 0 0 / 20%);
-  background-color: $vue-green;
+  background-color: $theme-color;
   color: white;
 }
 

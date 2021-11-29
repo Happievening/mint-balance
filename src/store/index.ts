@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import clone from '@/lib/clone';
 
-let data: Record[] = [];
+let data: RecordItem[] = [];
 try {
   data = require('../../parsedData.json');
 } catch (e) {
@@ -23,7 +23,7 @@ console.log(a.getItemsByKey('a'));
 Vue.use(Vuex);
 
 type VuexStoreState = {
-  recordList: Record[]
+  recordList: RecordItem[]
   tagList: TagItem[]
   result: ResultObject
   selectedTag: string
@@ -37,7 +37,7 @@ const store = new Vuex.Store({
     selectedTag: ''
   } as VuexStoreState,
   mutations: {
-    save(state, obj: { key: string, data: Record[] | string[] }) {
+    save(state, obj: { key: string, data: RecordItem[] | string[] }) {
       try {
         localStorage.setItem(
           obj.key,
@@ -51,9 +51,9 @@ const store = new Vuex.Store({
     retrieveRecord(state) {
       state.recordList = JSON.parse(
         localStorage.getItem('recordList') || JSON.stringify(data)
-      ) as Record[];
+      ) as RecordItem[];
     },
-    createRecord(state, r: Record) {
+    createRecord(state, r: RecordItem) {
       try {
         state.recordList = [...state.recordList, clone(r)];
         store.commit('save', {key: 'recordList', data: state.recordList});
@@ -67,10 +67,10 @@ const store = new Vuex.Store({
       state.tagList = JSON.parse(
         localStorage.getItem('tagList') ||
         JSON.stringify([
-          {id: 0, name: '衣服', type: '-'},
-          {id: 1, name: '饮食', type: '-'},
-          {id: 2, name: '工资', type: '+'},
-          {id: 3, name: '收租', type: '+'}
+          {id: 0, name: '餐饮', icon_name: 'canyin', type: '-'},
+          {id: 1, name: '交通', icon_name: 'jiaotong', type: '-'},
+          {id: 2, name: '工资', icon_name: 'gongzi', type: '+'},
+          {id: 3, name: '收租', icon_name: 'fangzu', type: '+'}
         ])
       );
     },
@@ -100,23 +100,23 @@ const store = new Vuex.Store({
         state.result = {code: 0, message: 'success'};
       }
     },
-    addTag(state, payload: '+' | '-') {
-      const t: TagItem = {id: 0, name: '', type: payload};
-      const name = window.prompt(`为 ${payload === '+' ? '收入' : '支出'} 输入新的标签：`);
-      if (name !== null) {
-        if (name === '') {
-          alert('标签不能为空哦！');
-        } else {
-          t.name = name;
-          store.commit('createTag', t);
-          if (state.result.code === 0) {
-            window.alert('创建成功！');
-          } else {
-            window.alert('创建失败！原因: ' + state.result.message);
-          }
-        }
-      }
-    },
+    // addTag(state, payload: '+' | '-') {
+    //   const t: TagItem = {id: 0, name: '', type: payload};
+    //   const name = window.prompt(`为 ${payload === '+' ? '收入' : '支出'} 输入新的标签：`);
+    //   if (name !== null) {
+    //     if (name === '') {
+    //       alert('标签不能为空哦！');
+    //     } else {
+    //       t.name = name;
+    //       store.commit('createTag', t);
+    //       if (state.result.code === 0) {
+    //         window.alert('创建成功！');
+    //       } else {
+    //         window.alert('创建失败！原因: ' + state.result.message);
+    //       }
+    //     }
+    //   }
+    // },
     addSelectedTag(state, tag: string) {
       state.selectedTag = tag;
       //

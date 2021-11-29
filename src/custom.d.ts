@@ -1,4 +1,5 @@
-type Record = {
+type RecordItem = {
+  id: number;
   type: string;
   notes: string;
   selectedTag: string;
@@ -13,9 +14,10 @@ type ResultObject = {
 };
 
 type TagItem = {
-  type: '+' | '-'
-  name: string
-  icon: string
+  id: number;
+  type: '+' | '-';
+  name: string;
+  icon_name: string;
 }
 
 type TagListModel = {

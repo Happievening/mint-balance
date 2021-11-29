@@ -56,7 +56,7 @@ nav {
 
   .selected .description,
   .selected .icon {
-    color: $vue-green;
+    color: $theme-color;
   }
 }
 </style>

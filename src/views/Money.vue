@@ -2,11 +2,6 @@
   <Layout>
     <Types :value.sync="record.type"/>
     <Tags @update:tags="onUpdateTags" :type="record.type"/>
-    <FormInput
-        class="input-block"
-        title=""
-        :value.sync="record.notes"
-    />
     <NumberPad :number.sync="record.amount" @ok="onSubmit"/>
   </Layout>
 </template>
@@ -26,7 +21,8 @@ import {Toast} from 'vant';
   components: {Types, Tags, NumberPad, FormInput, FormDate},
 })
 export default class Money extends Vue {
-  record: Record = {
+  record: RecordItem = {
+    id: 0,
     type: '-',
     notes: '',
     selectedTag: '未分类',
